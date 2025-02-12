@@ -20,7 +20,7 @@ jobs:
 
       - name: Make Changes
         run: |
-          echo "Last run: $(date)" > last-run.txt  # Creates/updates a timestamp file
+          echo "Last run: $(date)" > last-run.txt  # Creates/updates a file
           git add last-run.txt
 
       - name: Commit Changes
