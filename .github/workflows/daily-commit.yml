@@ -13,10 +13,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
+        
+      - name: devarakonda.kushieshwar@straive.com
+        run: echo "Hello, world!"
+        
       - name: Update Timestamp - devarakonda.kushieshwar@straive.com
         run: echo "Last run: $(date -u)" >> daily-log.txt
-
+     
       - name: Commit Changes
         run: |
           git config --global user.name "GitHub Actions Bot"
