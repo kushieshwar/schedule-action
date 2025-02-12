@@ -2,30 +2,25 @@ name: Daily Commit
 
 on:
   schedule:
-    - cron: '30 4 * * *'  # Runs daily at 4:30 AM UTC
+    - cron: "0 3 * * *"  # Runs daily at 03:00 UTC
+
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  commit:
+  commit_job:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Git
-        run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "devarakonda.kushieshwar@straive.com"
-
-      - name: Make Changes
-        run: |
-          echo "Last run: $(date)" > last-run.txt  # Creates/updates a file
-          git add last-run.txt
+      - name: Update Timestamp - devarakonda.kushieshwar@straive.com
+        run: echo "Last run: $(date -u)" >> daily-log.txt
 
       - name: Commit Changes
         run: |
-          git commit -m "Automated commit - $(date)" || echo "No changes to commit"
-
-      - name: Push Changes
-        run: git push
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "devarakonda.kushieshwar@straive.com"
+          git add daily-log.txt
+          git commit -m "Daily update: $(date -u)" || echo "No changes to commit"
+          git push
